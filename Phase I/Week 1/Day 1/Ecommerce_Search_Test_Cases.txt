@@ -1,0 +1,111 @@
+
+E-commerce Web Application – Search Functionality Test Cases
+Role Review: Test Lead
+Total Test Cases: 10 (including Negative and Edge Cases)
+
+TC-01: Basic Product Name Search
+Priority: High
+Complexity: Low
+Precondition: User is on Home Page.
+Steps:
+1. Enter a valid product name in the search box.
+2. Click Search or press Enter.
+3. Observe results.
+Expected Result:
+- Matching products are displayed.
+- Search term is reflected in results page.
+- Relevant products appear at the top.
+
+TC-02: Partial Product Name Search
+Priority: High
+Complexity: Medium
+Steps:
+1. Enter a partial product name.
+2. Execute search.
+3. Review results.
+Expected Result:
+- Products containing the partial keyword are displayed.
+- Results remain relevant to the entered text.
+
+TC-03: Verify Search Result Accuracy
+Priority: High
+Complexity: Medium
+Steps:
+1. Search for a known product.
+2. Open displayed results.
+3. Compare product details with search term.
+Expected Result:
+- Returned products match the searched keyword.
+- Irrelevant products are not displayed.
+
+TC-04: Search Using Different Letter Cases
+Priority: Medium
+Complexity: Low
+Steps:
+1. Search using uppercase keyword.
+2. Search using lowercase keyword.
+3. Compare results.
+Expected Result:
+- Results are identical irrespective of letter case.
+
+TC-05: Search with Special Characters in Product Name
+Priority: Medium
+Complexity: Medium
+Steps:
+1. Search for a product containing valid special characters (e.g., USB-C).
+2. Review results.
+Expected Result:
+- Relevant products are displayed correctly.
+- No application error occurs.
+
+TC-06: Search Using Leading and Trailing Spaces
+Priority: Medium
+Complexity: Low
+Steps:
+1. Enter a valid product name with spaces before and after.
+2. Execute search.
+Expected Result:
+- Spaces are trimmed.
+- Correct results are displayed.
+
+TC-07: Negative Test – Non-Existing Product Search
+Priority: High
+Complexity: Low
+Steps:
+1. Enter a random/non-existing product name.
+2. Execute search.
+Expected Result:
+- No results message is displayed.
+- Application remains stable.
+- Suggestions may be displayed if supported.
+
+TC-08: Negative Test – Special Characters Only
+Priority: Medium
+Complexity: Medium
+Steps:
+1. Enter only special characters (e.g., @#$%^).
+2. Execute search.
+Expected Result:
+- Proper validation or no-results message is shown.
+- No system error or crash occurs.
+
+TC-09: Edge Case – Empty Search
+Priority: High
+Complexity: Low
+Steps:
+1. Leave search field blank.
+2. Click Search.
+Expected Result:
+- Validation message is displayed OR search is prevented.
+- No unexpected behavior occurs.
+
+TC-10: Edge Case – Maximum Length Search Input
+Priority: Medium
+Complexity: High
+Steps:
+1. Enter a search string exceeding the supported character limit.
+2. Execute search.
+Expected Result:
+- Input is handled gracefully.
+- Validation message or truncation is applied as per requirements.
+- No performance degradation or application failure occurs.

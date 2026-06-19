@@ -1,0 +1,52 @@
+Scenario 5 — API Testing
+
+❌ Weak: "Write API test cases for user registration."
+
+What's missing: No HTTP method, no request/response structure, 
+no status codes to validate, no tool context (Postman/RestAssured).
+
+Response:
+Here is a comprehensive suite of API test cases for a User Registration (POST /api/v1/auth/register) endpoint.
+Assuming a standard JSON payload requiring username, email, and password, these cases cover functional, validation, 
+security, and performance scenarios.
+1. 
+Happy Path (Positive Scenarios)Test Case IDScenario DescriptionInput Payload / RequestExpected ResponseTC_REG_01Successful registration with all valid required fields.Valid username, email, password.210 Created or 200 OK. Response contains user ID, creation timestamp, and masks/excludes password.TC_REG_02Successful registration with optional fields included.Valid required fields + optional fields (e.g., first_name, phone).201 Created. Optional fields are correctly saved and returned in the response.
+
+
+
+ICEPOT Prompt:
+
+Scenario: API Testing
+C - Context        : As a senior Test Automation Engineer write test scripts to test the User Registration Post Call.
+I - Instruction    : [Mandatory]  Post Call uses Basic Auth and verify the authentication
+[Mandatory] Include steps to verify the response schema
+[Mandatory] Payload is in JSON format
+[Mandatory] Include Negative and edge cases
+[Mandatory] Restrict test count to 5 including all positive negative and Edge cases. 
+E - Example        : Payload{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@test.com",
+  "password": "Password@123",
+  "confirmPassword": "Password@123",
+  "phoneNumber": "9876543210"
+}
+P - Persona        : Act as a Test Lead review the test scripts and include or remove test cases if required.
+O - Output Format  : Downloadable text file
+T - Tone           : Professional and precise
+
+
+Response:
+📄 Download the file here:
+
+User_Registration_API_Test_Scripts.txt
+
+The document contains:
+
+5 API automation test scripts
+Basic Authentication validation
+JSON payload validation
+Response schema verification
+Positive, negative, and edge-case coverage
+Test Lead review with rationale for included/excluded test cases
+Professional format suitable for automation framework onboarding and ADO/JIRA documentation.

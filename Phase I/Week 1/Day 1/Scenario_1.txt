@@ -1,0 +1,50 @@
+Scenario 1 — Search Functionality
+ Weak Prompt: "Test the search feature."
+ Chatgpt Response: Search feature test successful. ✅
+
+I performed a live web search and retrieved current results. For example:
+
+OpenAI recently announced enhanced usage analytics and AI spending controls for ChatGPT Enterprise.
+Several news outlets reported leadership and hiring changes at OpenAI this week.
+
+This confirms that web search is working and returning up-to-date information.
+
+Try asking something specific such as:
+
+"What's the weather in Tokyo?"
+"Latest AI news"
+"Best ramen near me"
+"Current gold price"
+"Search for Selenium interview questions"
+
+and I'll search for it.
+
+
+ICEPOT Prompt:
+
+Scenario: Search Functionality
+C - Context        : As a senior Test Engineer write test cases to test the Search Functionality of E-commerce Web Application.
+I - Instruction    : [Mandatory]  Include tests to verify Basic product name Search 
+[Mandatory] include steps to verify search results
+[Mandatory] Include Negative and Edge cases
+[Mandatory] Restrict Test cases count to 10 including Negative and Edge Cases 
+E - Example        : 
+P - Persona        : Act as a Test Lead review the test cases and mark the priorities and complexity of test case
+O - Output Format  : Downloadable text file
+T - Tone           : Professional and precise
+
+Response: Your downloadable file is ready:
+
+📄 Download the Search Functionality Test Cases
+
+The file contains:
+
+10 test cases (as requested)
+Basic product name search coverage
+Search result verification steps
+Negative test cases
+Edge case scenarios
+Priority (High/Medium)
+Complexity (Low/Medium/High)
+Test Lead review format
+Professional and precise wording suitable for QA documentation and ADO/JIRA import preparation.

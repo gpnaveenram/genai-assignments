@@ -1,0 +1,88 @@
+================================================================================
+TEST SUITE: USER REGISTRATION - MANDATORY FILE UPLOAD FEATURE
+================================================================================
+Role: Senior Test Automation Engineer
+Reviewer: Test Lead
+Status: Approved (Optimized to exactly 5 high-impact test cases)
+Target Specifications: 
+  - Mandatory field (Registration must fail without it)
+  - Allowed Formats: .pdf, .docx
+  - Maximum File Size: 1 MB (1,024 KB)
+
+--------------------------------------------------------------------------------
+TEST LEAD REVIEW NOTE:
+"As Test Lead, I have reviewed the initial test plan. To strictly adhere to the 
+5-test-case boundary while ensuring maximum coverage (Positive, Negative, and 
+Boundary/Edge conditions), I have streamlined the suite. We cover the explicit 
+happy paths, the exact 1MB size boundary, format restrictions, and the mandatory 
+validation check. These are structured for seamless automation implementation."
+--------------------------------------------------------------------------------
+
+TC_01: Positive - Successful Registration with Valid PDF File (Happy Path)
+--------------------------------------------------------------------------------
+Objective: Verify that a user can register successfully when uploading a valid PDF file within the size limit.
+Pre-requisites: A valid 500 KB test file named "valid_document.pdf" exists.
+Steps:
+  1. Navigate to the User Registration page.
+  2. Populate all required text fields (Username, Email, Password) with valid data.
+  3. Click on the File Upload field and select "valid_document.pdf".
+  4. Submit the registration form.
+Expected Result:
+  - Form submission is successful.
+  - API returns a 201 Created status code.
+  - The file is uploaded and associated with the user profile correctly.
+
+TC_02: Positive - Successful Registration with Valid DOCX File (Happy Path)
+--------------------------------------------------------------------------------
+Objective: Verify that a user can register successfully when uploading a valid DOCX file within the size limit.
+Pre-requisites: A valid 800 KB test file named "valid_resume.docx" exists.
+Steps:
+  1. Navigate to the User Registration page.
+  2. Populate all required text fields with valid data.
+  3. Click on the File Upload field and select "valid_resume.docx".
+  4. Submit the registration form.
+Expected Result:
+  - Form submission is successful.
+  - API returns a 201 Created status code.
+  - The system processes the .docx format without any errors.
+
+TC_03: Negative - Validation on Missing Mandatory File
+--------------------------------------------------------------------------------
+Objective: Verify that registration fails when the mandatory file upload field is left empty.
+Pre-requisites: None.
+Steps:
+  1. Navigate to the User Registration page.
+  2. Populate all required text fields with valid data.
+  3. Leave the File Upload field entirely empty.
+  4. Attempt to submit the registration form.
+Expected Result:
+  - Form submission is blocked.
+  - UI displays an error message: "File upload is required."
+  - If intercepted at API level, returns 400 Bad Request with field validation error.
+
+TC_04: Edge Case - Boundary Size Limit Verification (Exactly 1 MB and 1.01 MB)
+--------------------------------------------------------------------------------
+Objective: Verify system behavior exactly at the 1 MB threshold limit.
+Pre-requisites: 
+  - File "exact_limit.pdf" of exactly 1,024 KB (1 MB).
+  - File "exceeded_limit.pdf" of 1,025 KB (1.01 MB).
+Steps:
+  1. Populate registration fields, upload "exact_limit.pdf", and submit. Verify success.
+  2. Clear form, re-populate fields, upload "exceeded_limit.pdf", and submit.
+Expected Result:
+  - "exact_limit.pdf" (1 MB) must submit successfully (201 Created).
+  - "exceeded_limit.pdf" (1.01 MB) must be rejected with a clear error: "File size exceeds the maximum limit of 1 MB." (400 Bad Request).
+
+TC_05: Negative - Invalid File Extension / Format Restriction
+--------------------------------------------------------------------------------
+Objective: Verify that the system rejects file formats other than .pdf and .docx.
+Pre-requisites: A 200 KB file named "invalid_format.png" exists.
+Steps:
+  1. Navigate to the User Registration page.
+  2. Populate all required text fields with valid data.
+  3. Attempt to upload "invalid_format.png".
+Expected Result:
+  - System rejects the file immediately upon selection or during submission.
+  - Error message displayed: "Invalid file format. Only .pdf and .docx files are allowed."
+  - Form cannot be submitted.
+================================================================================

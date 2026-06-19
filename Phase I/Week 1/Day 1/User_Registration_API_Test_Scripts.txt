@@ -1,0 +1,158 @@
+
+API Testing – User Registration POST Call Automation Scripts
+Role Review: Test Lead
+Final Count: 5 Test Cases (Positive, Negative, Edge Cases Included)
+
+Technology Assumption: Rest Assured + Java
+Authentication: Basic Auth
+Payload Format: JSON
+
+====================================================
+TC_01 - Successful User Registration with Valid Basic Auth
+Priority: High
+Complexity: Medium
+====================================================
+
+@Test
+public void registerUser_ValidRequest() {
+
+    given()
+        .auth().preemptive().basic("validUser", "validPassword")
+        .contentType("application/json")
+        .body(payload)
+    .when()
+        .post("/api/register")
+    .then()
+        .statusCode(201)
+        .body("status", equalTo("SUCCESS"))
+        .body("message", notNullValue())
+        .body("userId", notNullValue());
+
+    // Response Schema Validation
+    JsonSchemaValidator.matchesJsonSchemaInClasspath("registrationSuccessSchema.json");
+}
+
+Expected Result:
+- User registered successfully.
+- Status Code = 201.
+- Response schema validation passes.
+
+====================================================
+TC_02 - Verify Basic Authentication Failure
+Priority: High
+Complexity: Low
+====================================================
+
+@Test
+public void registerUser_InvalidBasicAuth() {
+
+    given()
+        .auth().preemptive().basic("invalidUser", "invalidPassword")
+        .contentType("application/json")
+        .body(payload)
+    .when()
+        .post("/api/register")
+    .then()
+        .statusCode(401);
+}
+
+Expected Result:
+- Unauthorized response returned.
+- User is not registered.
+
+====================================================
+TC_03 - Negative Test - Existing Email Registration
+Priority: High
+Complexity: Medium
+====================================================
+
+@Test
+public void registerUser_DuplicateEmail() {
+
+    payload.put("email","existing@test.com");
+
+    given()
+        .auth().preemptive().basic("validUser","validPassword")
+        .contentType("application/json")
+        .body(payload)
+    .when()
+        .post("/api/register")
+    .then()
+        .statusCode(anyOf(is(400), is(409)))
+        .body("message", containsString("already"));
+}
+
+Expected Result:
+- Duplicate registration blocked.
+- Appropriate error message returned.
+
+====================================================
+TC_04 - Negative Test - Invalid JSON Payload
+Priority: High
+Complexity: Medium
+====================================================
+
+@Test
+public void registerUser_InvalidPayload() {
+
+    String invalidPayload = "{ invalid json }";
+
+    given()
+        .auth().preemptive().basic("validUser","validPassword")
+        .contentType("application/json")
+        .body(invalidPayload)
+    .when()
+        .post("/api/register")
+    .then()
+        .statusCode(400);
+}
+
+Expected Result:
+- API rejects malformed JSON.
+- Validation error returned.
+
+====================================================
+TC_05 - Edge Case - Maximum Length Input Values
+Priority: Medium
+Complexity: High
+====================================================
+
+@Test
+public void registerUser_MaxLengthFields() {
+
+    payload.put("firstName", "A".repeat(255));
+    payload.put("lastName", "B".repeat(255));
+
+    given()
+        .auth().preemptive().basic("validUser","validPassword")
+        .contentType("application/json")
+        .body(payload)
+    .when()
+        .post("/api/register")
+    .then()
+        .statusCode(anyOf(is(201), is(400)));
+}
+
+Expected Result:
+- API handles boundary values gracefully.
+- No crash or server error.
+- Validation follows business rules.
+
+====================================================
+TEST LEAD REVIEW
+====================================================
+
+Included:
+1. Positive Registration Flow.
+2. Basic Authentication Verification.
+3. Duplicate Email Validation.
+4. Invalid JSON Validation.
+5. Boundary/Edge Case Validation.
+
+Removed:
+- Weak Password Test.
+- Empty Payload Test.
+- Password Mismatch Test.
+
+Reason:
+To comply with the requirement of restricting total test count to 5 while maintaining maximum risk coverage across authentication, schema validation, functional validation, negative scenarios, and edge cases.

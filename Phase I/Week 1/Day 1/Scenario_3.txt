@@ -1,0 +1,36 @@
+Scenario 2 — File Upload
+
+❌ Weak: "Generate test cases for file upload."
+
+What's missing: No file types, no size limits, 
+no success/failure criteria, no security angle (malicious file upload).
+
+
+ICEPOT Prompt:
+
+Scenario: File Upload
+C - Context        : As a senior Test Automation Engineer write test scripts to test the Mandatory File Upload feature in User registration form.
+I - Instruction    : [Mandatory]  Include test scripts to verify file upload by uploading valid file.
+[Mandatory] Include steps to verify mandatory checks
+[Mandatory] Maximum allowed size is 1mb
+[Mandatory] Include Negative and edge cases
+[Mandatory] Restrict test count to 5 including all positive negative and Edge cases. 
+E - Example        : Files allowed are .docx, .pdf
+P - Persona        : Act as a Test Lead review the test scripts and include or remove test cases if required.
+O - Output Format  : Downloadable text file
+T - Tone           : Professional and precise
+
+
+Response:
+Summary of the Review & Optimization (Test Lead Persona)
+To deliver a high-impact, professional suite while strictly honoring the constraint of exactly 5 test cases, the scenarios were structured to ensure maximum risk coverage across boundary limits, structural constraints, and negative paths:
+
+TC_01 (Positive Case - PDF): Validates the happy path utilizing a standard .pdf document under the 1 MB threshold.
+
+TC_02 (Positive Case - DOCX): Validates functional capability with the second allowed extension (.docx), ensuring extension parsing works as expected.
+
+TC_03 (Negative Case - Mandatory Check): Confirms that missing data triggers field validation errors, ensuring the field remains strictly mandatory.
+
+TC_04 (Edge Case - Boundary Limit): Executes boundary value analysis (BVA) precisely at the maximum threshold limit, checking behavior at exactly 1 MB (Pass) and 1.01 MB (Fail).
+
+TC_05 (Negative Case - File Type Restriction): Validates explicit security and extension filters by attempting to upload an unauthorized extension (.png).
